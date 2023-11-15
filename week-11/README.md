@@ -1,7 +1,6 @@
 # Nama : Arsyanda Irza Rabbani Yuardhino
 # Kelas : TI-3F
 # Nim : 2141720245
-# WEEK 11
 
 ## Tugas Praktikum 1 (Langkah 9): Run atau tekan F5 untuk melihat hasil aplikasi yang Anda telah buat. Capture hasilnya untuk soal praktikum nomor 4.
 <img src="docs/Langkah9.jpg">
@@ -26,23 +25,22 @@ Pada langkah 9, saya telah membuat metode _buildTaskTile, yang digunakan untuk m
 
 ### 5. Apa kegunaan method pada Langkah 11 dan 13 dalam lifecyle state ?
 
-- Langkah 11 (initState()): Method initState() digunakan untuk melakukan inisialisasi state pada widget. Pada langkah ini, sebuah ScrollController dideklarasikan dan dimulai dengan menambahkan listener. Fungsinya adalah untuk mengatur perilaku ketika terjadi event scroll pada ListView, khususnya untuk menghapus fokus dari semua TextField ketika terjadi scrolling. Ini membantu untuk menghindari masalah interaksi pengguna saat keyboard muncul dan sekaligus memastikan pengalaman pengguna yang lebih baik.
+- Langkah 11 (initState()): Method initState() digunakan untuk melakukan inisialisasi state pada widget. Pada langkah ini, sebuah ScrollController dideklarasikan dan dimulai dengan menambahkan listener. Fungsinya adalah untuk mengatur perilaku ketika terjadi event scroll pada ListView.
 
 - Langkah 13 (dispose()): Method dispose() merupakan bagian dari siklus hidup widget dan digunakan untuk membersihkan dan melepaskan sumber daya sebelum widget dihancurkan. Pada langkah ini, scrollController dihentikan dan dibersihkan. Tujuannya adalah untuk menghindari memory leaks atau masalah kinerja dengan memastikan bahwa sumber daya yang digunakan widget dihentikan dengan benar saat widget tidak lagi digunakan.
 
 ## Tugas Praktikum 2: InheritedWidget
 ### 1. Selesaikan langkah-langkah praktikum tersebut, lalu dokumentasikan berupa GIF hasil akhir praktikum beserta penjelasannya di file README.md!
-<img src="docs/praktikum2.gif" width = 40%></img>
+<img src="docs/praktikum2.gif" 
 
-### 2. Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
+## 2. Jelaskan mana yang dimaksud InheritedWidget pada langkah 1 tersebut! Mengapa yang digunakan InheritedNotifier?
 
 inheritedWidget di langkah 1 adalah 
 return context.
     dependOnInheritedWidgetOfExactType<PlanProvider>()!.notifier!;
-InheritedNotifier digunakan karena ia menyediakan kemampuan untuk mempublikasikan notifikasi saat terjadi perubahan pada data yang dipantau. Dalam konteks ini, PlanProvider menggunakan ValueNotifier untuk mengatur perubahan pada data Plan. Dengan demikian, saat terjadi perubahan pada data Plan, PlanProvider akan memberi tahu widget-widget di bawahnya yang menggunakan data tersebut untuk melakukan rebuild
+InheritedNotifier digunakan karena ia menyediakan kemampuan untuk mempublikasikan notifikasi saat terjadi perubahan pada data yang dipantau. Dalam konteks ini, PlanProvider menggunakan ValueNotifier untuk mengatur perubahan pada data Plan.
 
-
-### 3. Jelaskan maksud dari method di langkah 3 pada praktikum tersebut! Mengapa dilakukan demikian?
+## 3. Jelaskan maksud dari method di langkah 3 pada praktikum tersebut! Mengapa dilakukan demikian?
 
 int get completedCount: Method ini menghitung jumlah tugas yang telah selesai dalam rencana (plan) dengan menggunakan method where pada list tasks dan menghitung berapa jumlah tugas yang memiliki atribut complete bernilai true.
 

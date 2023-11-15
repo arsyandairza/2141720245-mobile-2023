@@ -78,4 +78,7 @@ Future<Response> getData() async {
 }
 ```
 
+**Soal 2**
+
+<img src="docs/p1soal2.png">
 

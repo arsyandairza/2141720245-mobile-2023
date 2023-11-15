@@ -82,3 +82,12 @@ Future<Response> getData() async {
 
 <img src="docs/p1soal2.png">
 
+**Soal 3**
+1. Jelaskan maksud kode langkah 5 tersebut terkait substring dan catchError!
+
+#### substring() digunakan untuk mengambil substring dari sebuah string, dimulai dari indeks awal dan berakhir pada indeks akhir yang diberikan, sedangkan catchError() digunakan untuk menangani kesalahan yang terjadi dalam operasi asinkron.
+
+2. Capture hasil praktikum Anda berupa GIF dan lampirkan di README. Lalu lakukan commit dengan pesan "W12: Soal 3".
+
+<img src="docs/p1record.gif">
+

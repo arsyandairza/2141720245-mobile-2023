@@ -517,3 +517,13 @@ Sedangkan pada langkah 4, digunakan fungsi `Future.wait` untuk menunggu sejumlah
 
 Perbedaan utama antara keduanya terletak pada cara mengelola dan menunggu kelompok `Future`. Langkah 1 menggunakan objek `FutureGroup`, sedangkan Langkah 4 langsung menggunakan `Future.wait` untuk menangani beberapa `Future` secara bersamaan. Langkah 4 dapat dianggap lebih langsung dan mudah dipahami, sementara Langkah 1 menunjukkan pendekatan yang lebih modular dengan penggunaan objek `FutureGroup`.
 
+
+# **Praktikum 5: Menangani Respon Error pada Async Code**
+
+### Ada beberapa teknik untuk melakukan handle error pada code async. Pada praktikum ini Anda akan menggunakan 2 cara, yaitu then() callback dan pola async/await.
+
+## **Soal 9**
+
+-  **Capture hasil praktikum Anda berupa GIF dan lampirkan di `README`. Lalu lakukan commit dengan pesan "W12: Soal 9".**
+
+<img src="docs/p5soal9.gif">

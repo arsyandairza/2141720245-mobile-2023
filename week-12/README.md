@@ -344,3 +344,10 @@ Metode pertama, `getNumber`, bertanggung jawab untuk membuat `Completer`. Setela
 
 Metode kedua menggunakan `await Future.delayed(...)` untuk menunda selama lima detik untuk mensimulasikan operasi yang membutuhkan waktu. Setelah itu, nilai `completer` dipenuhi dengan angka 42, yang menunjukkan bahwa operasi telah selesai.
 
+## **Soal 6**
+
+-  **Jelaskan maksud perbedaan kode langkah 2 dengan langkah 5-6 tersebut!**
+
+Pada langkah 5 mengubah metode `calculate` dengan menambahkan blok `try-catch`. Jika terjadi kesalahan selama operasi asinkron, blok `catch` akan menangkap kesalahan tersebut, dan `completer` akan diselesaikan dengan sebuah objek kosong `{}`. Langkah 6 adalah bagian dari fungsi `onPressed` pada tombol "GO!" yang memanggil metode `getNumber`. Pada langkah ini, setelah pemanggilan `getNumber`, `then` digunakan untuk menangkap hasilnya. Dalam blok `then`, nilai hasil dikonversi menjadi string dan diperbarui ke dalam variabel `result` melalui `setState`. Jika ada kesalahan, `catchError` akan menangkapnya dan mengatur `result` ke string "An error Occurred".
+
+<img src="docs/p3soal6.gif">

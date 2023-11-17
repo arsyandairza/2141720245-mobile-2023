@@ -80,7 +80,7 @@ class _FuturePageState extends State<FuturePage> {
     try {
       await Future.delayed(const Duration(seconds: 5));
       completer.complete(42);
-    } catch (e) {
+    } catch (_) {
       completer.completeError({});
     }
   }

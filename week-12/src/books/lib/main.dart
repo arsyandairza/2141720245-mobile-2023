@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Irzaa Future Demo',
+      title: 'Flutter Demo Irzaa',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -33,11 +34,13 @@ class FuturePage extends StatefulWidget {
 
 class _FuturePageState extends State<FuturePage> {
   String result = '';
+  late Completer completer;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(' Irzaa Back from the Futuree '),
+        title: const Text('Irzaa Back from the Future'),
       ),
       body: Center(
         child: Column(
@@ -45,8 +48,17 @@ class _FuturePageState extends State<FuturePage> {
           children: [
             const Spacer(),
             ElevatedButton(
-                onPressed: count,
-                child: const Text("GO!")),
+              onPressed: () {
+                getNumber().then((value) {
+                  setState(() {
+                    result = value.toString();
+                  });
+                }).catchError((e) {
+                  result = 'An error Occured';
+                });
+              },
+              child: const Text("GO!"),
+            ),
             const Spacer(),
             Text(result),
             const Spacer(),
@@ -56,6 +68,21 @@ class _FuturePageState extends State<FuturePage> {
         ),
       ),
     );
+  }
+
+  Future getNumber() {
+    completer = Completer<int>();
+    calculate();
+    return completer.future;
+  }
+
+  calculate() async {
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (e) {
+      completer.completeError({});
+    }
   }
 
   Future<Response> getData() async {

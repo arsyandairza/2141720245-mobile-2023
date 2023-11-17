@@ -6,7 +6,6 @@
 
 ### Praktikum 1: Mengunduh Data dari Web Service (API)
 
-
 **Soal 1**
 
 **Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.**
@@ -94,6 +93,12 @@ Future<Response> getData() async {
 ---
 
 # Praktikum 2: Menggunakan await/async untuk menghindari callbacks
+
+### Ada alternatif penggunaan Future yang lebih clean, mudah dibaca dan dirawat, yaitu pola async/await. Intinya pada dua kata kunci ini:
+
+### 1. async digunakan untuk menandai suatu method sebagai asynchronous dan itu harus ditambahkan di depan kode function.
+
+### 2. await digunakan untuk memerintahkan menunggu sampai eksekusi suatu function itu selesai dan mengembalikan sebuah value. Untuk then bisa digunakan pada jenis method apapun, sedangkan await hanya bekerja di dalam method async.
 
 ```Dart
 import 'package:flutter/material.dart';
@@ -201,4 +206,141 @@ Pada langkah 1, dilakukan penambahan tiga method baru dalam kelas `_FuturePageSt
 Pada langkah 2, dilakukan penambahan method `count`. Method ini memiliki tiga pemanggilan fungsi asinkron `(await)` ke metode-metode yang telah ditambahkan sebelumnya. Method `count` menghitung jumlah total dari hasil yang dikembalikan oleh metode-metode asinkron dan kemudian mengatur nilai `result` dalam state untuk menampilkan hasilnya.
 
 
+# **Praktikum 3: Menggunakan Completer di Future**
+
+### Menggunakan Future dengan then, catchError, async, dan await mungkin sudah cukup untuk banyak kasus, tetapi ada alternatif melakukan operasi async di Dart dan Flutter yaitu dengan class Completer.
+
+Completer membuat object Future yang mana Anda dapat menyelesaikannya nanti (late) dengan return sebuah value atau error.
+```Dart
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:async/async.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo Irzaa',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const FuturePage(),
+    );
+  }
+}
+
+class FuturePage extends StatefulWidget {
+  const FuturePage({super.key});
+
+  @override
+  State<FuturePage> createState() => _FuturePageState();
+}
+
+class _FuturePageState extends State<FuturePage> {
+  String result = '';
+  late Completer completer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Irzaa Back from the Future'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            ElevatedButton(
+              onPressed: () {
+                getNumber().then((value) {
+                  setState(() {
+                    result = value.toString();
+                  });
+                }).catchError((e) {
+                  result = 'An error Occured';
+                });
+              },
+              child: const Text("GO!"),
+            ),
+            const Spacer(),
+            Text(result),
+            const Spacer(),
+            const CircularProgressIndicator(),
+            const Spacer()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future getNumber() {
+    completer = Completer<int>();
+    calculate();
+    return completer.future;
+  }
+
+  calculate() async {
+    try {
+      await Future.delayed(const Duration(seconds: 5));
+      completer.complete(42);
+    } catch (e) {
+      completer.completeError({});
+    }
+  }
+
+  Future<Response> getData() async {
+    const authority = 'www.googleapis.com';
+    const path = '/books/v1/volumes/VEUFEAAAQBAJ';
+    Uri url = Uri.https(authority, path);
+    return await http.get(url);
+  }
+
+  Future<int> returnOneAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 1;
+  }
+
+  Future<int> returnTwoAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 2;
+  }
+
+  Future<int> returnThreeAsync() async {
+    await Future.delayed(const Duration(seconds: 3));
+    return 3;
+  }
+
+  Future count() async {
+    int total = 0;
+    total = await returnOneAsync();
+    total += await returnTwoAsync();
+    total += await returnThreeAsync();
+    setState(() {
+      result = total.toString();
+    });
+  }
+}
+```
+<img src="docs/p3soal5.gif">
+
+## **Soal 5**
+
+-  **Jelaskan maksud kode langkah 2 tersebut!**
+
+Baris kedua kode tersebut memberikan penjelasan tentang konsep `Completer` di Flutter. Pertama, deklarasikan variabel `completer` sebagai `late Completer`artinya, nilainya akan diinisialisasi sebelum digunakan. Terakhir, ada dua metode yang diterapkan.
+
+Metode pertama, `getNumber`, bertanggung jawab untuk membuat `Completer`. Setelah itu, metode lain, `calculate`, dihubungkan.
+
+Metode kedua menggunakan `await Future.delayed(...)` untuk menunda selama lima detik untuk mensimulasikan operasi yang membutuhkan waktu. Setelah itu, nilai `completer` dipenuhi dengan angka 42, yang menunjukkan bahwa operasi telah selesai.
 

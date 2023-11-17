@@ -40,7 +40,7 @@ class _FuturePageState extends State<FuturePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Irzaa Back from the Future'),
+        title: const Text('Irzaa Back from the Future '),
       ),
       body: Center(
         child: Column(
@@ -48,15 +48,7 @@ class _FuturePageState extends State<FuturePage> {
           children: [
             const Spacer(),
             ElevatedButton(
-              onPressed: () {
-                getNumber().then((value) {
-                  setState(() {
-                    result = value.toString();
-                  });
-                }).catchError((e) {
-                  result = 'An error Occured';
-                });
-              },
+              onPressed: returnFG,
               child: const Text("GO!"),
             ),
             const Spacer(),
@@ -80,9 +72,31 @@ class _FuturePageState extends State<FuturePage> {
     try {
       await Future.delayed(const Duration(seconds: 5));
       completer.complete(42);
-    } catch (_) {
+    } catch (e) {
       completer.completeError({});
     }
+  }
+
+  void returnFG() {
+    final futures = Future.wait<int>([
+      returnOneAsync(),
+      returnTwoAsync(),
+      returnThreeAsync(),
+    ]);
+    FutureGroup<int> futureGroup = FutureGroup<int>();
+    futureGroup.add(returnOneAsync());
+    futureGroup.add(returnTwoAsync());
+    futureGroup.add(returnThreeAsync());
+    futureGroup.close();
+    futures.then((value) {
+      int total = 0;
+      for (var element in value) {
+        total += element;
+      }
+      setState(() {
+        result = total.toString();
+      });
+    });
   }
 
   Future<Response> getData() async {

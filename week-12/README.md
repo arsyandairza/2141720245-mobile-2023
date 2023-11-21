@@ -560,3 +560,13 @@ Pada langkah 4, method `handleError()` akan mengeksekusi `returnError()` dalam b
 <img src="docs/p6soal11.png">
 
 ---
+
+## **Soal 12**
+
+- Jika Anda tidak melihat animasi loading tampil, kemungkinan itu berjalan sangat cepat. Tambahkan delay pada method getPosition() dengan kode await Future.delayed(const Duration(seconds: 3));
+
+- Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+> Karena Flutter web menggunakan API Geolocation langsung dari browser. Pada Flutter web, izin untuk mengakses lokasi dikelola oleh browser, bukan oleh sistem operasi (seperti Android pada perangkat seluler). Oleh karena itu, meskipun tidak menambahkan izin secara langsung ke `AndroidManifest`, koordinat GPS masih dapat diperoleh di browser, tetapi tetap memerlukan izin dari pengguna.
+
+<img src="docs/p6soal12.gif">
+

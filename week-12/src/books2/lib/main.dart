@@ -1,4 +1,5 @@
 import 'package:books2/geolocation.dart';
+import 'package:books2/navigation_dialog.dart';
 import 'package:books2/navigation_first.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const NavigationFirst(),
+      home: const NavigationDialogScreen(),
     );
   }
 }

@@ -635,5 +635,13 @@ class _NavigationFirstState extends State<NavigationFirst> {
 
 - Gantilah 3 warna pada langkah 5 dengan warna favorit Anda!
 
-<img src="docs/p6soal16.gif">
+<img src="docs/p8soal16.gif">
 
+**Soal 17**
+
+- Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+> Pada kode yang diberikan, fungsi _showColorDialog(BuildContext context) digunakan untuk menampilkan dialog yang berisi pilihan warna. Ketika pengguna mengklik salah satu tombol "Blue", "Yellow", atau "Pink", nilai variabel color akan diubah sesuai dengan warna yang dipilih. Kemudian, fungsi Navigator.pop(context, color) akan menutup dialog dan mengembalikan nilai variabel color ke fungsi yang memanggilnya. Dalam hal ini, fungsi yang memanggilnya adalah fungsi onPressed() dari tombol "Change Color" di kelas _NavigationDialogScreenState. Setelah dialog ditutup, nilai variabel color akan diperbarui dan diterapkan pada latar belakang Scaffold di kelas build().
+
+- Gantilah 3 warna pada langkah 3 dengan warna favorit Anda!
+
+<img src="docs/p8soal17.gif">

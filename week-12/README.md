@@ -570,3 +570,12 @@ Pada langkah 4, method `handleError()` akan mengeksekusi `returnError()` dalam b
 
 <img src="docs/p6soal12.gif">
 
+### Praktikum 7: Manajemen Future dengan FutureBuilder
+
+## **Soal 13**
+
+- Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+> Tidak ada perbedaan UI dengan praktikum sebelumnya, keduanya tetap menampilkan koordinat Geolokasi dengan layout yang sama karena keduanya masih mengambil lokasi secara sinkron dalam blok `initState`.
+
+<img src="docs/p6soal13.gif">
+

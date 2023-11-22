@@ -10,10 +10,12 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   String myPosition = '';
+  Future<Position>? position;
 
   @override
   void initState() {
     super.initState();
+    position = getPosition();
     getPosition().then((Position myPos) {
       setState(() {
         myPosition =

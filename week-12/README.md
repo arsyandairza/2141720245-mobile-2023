@@ -579,3 +579,9 @@ Pada langkah 4, method `handleError()` akan mengeksekusi `returnError()` dalam b
 
 <img src="docs/p6soal13.gif">
 
+## **Soal 14**
+
+- Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+> Tidak ada perbedaan, karena hanya menambahkan `handleError()` yang akan dijalankan ketika terdapat kesalahan. Pesan **Something terrible happened!** tidak muncul karenan tidak ada kesalahan.
+
+<img src="docs/p6soal14.gif">

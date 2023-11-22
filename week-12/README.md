@@ -627,3 +627,13 @@ class _NavigationFirstState extends State<NavigationFirst> {
 class _NavigationFirstState extends State<NavigationFirst> {
   Color color = Color.fromARGB(255, 210, 210, 25);
 ```
+
+**Soal 16**
+
+- Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+> Saat mengklik tombol "Blue", "Yellow", atau "Pink", warna latar belakang layar kedua akan berubah sesuai dengan warna yang dipilih. Karena metode onPressed dari setiap tombol memanggil metode Navigator.pop(context, color). Metode ini mengembalikan warna yang dipilih ke layar pertama, yang kemudian digunakan untuk mengatur warna latar belakang layar pertama.
+
+- Gantilah 3 warna pada langkah 5 dengan warna favorit Anda!
+
+<img src="docs/p6soal16.gif">
+

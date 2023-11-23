@@ -82,3 +82,9 @@ class ColorStream {
 - Apa maksud isi perintah kode tersebut?
 > Untuk menjelaskan fungsi keyword yield* pada kode yang diberikan. Kode tersebut mendefinisikan kelas ColorStream yang memiliki metode getColors(). Metode getColors() menghasilkan aliran warna yang berubah setiap detik. Warna yang dihasilkan dipilih dari daftar warna yang disimpan dalam properti colors.
 
+**Soal 4**
+
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+<img src= "docs/soal4.gif">
+

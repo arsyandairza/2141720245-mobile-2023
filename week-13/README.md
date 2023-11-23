@@ -88,3 +88,9 @@ class ColorStream {
 
 <img src= "docs/soal4.gif">
 
+**Soal 5**
+
+- Jelaskan perbedaan menggunakan listen dan await for (langkah 9) !
+> 'await' digunakan untuk mengambil nilai asinkron secara berurutan dalam suatu loop, sementara 'listen' digunakan untuk mendaftarkan fungsi yang akan dipanggil setiap kali ada perubahan dalam stream tanpa menghentikan eksekusi program.
+
+- Lakukan commit hasil jawaban Soal 5 dengan pesan "W13: Jawaban Soal 5"

@@ -243,4 +243,49 @@ class ColorStream {
   karena menggunakan `Stream stream = numberStreamController.stream.asBroadcastStream();` sehingga dapat didengarkan oleh beberapa subscriptions secara bersamaan, berbeda dengan stream biasa yang hanya dapat didengarkan sekali. dan setiap subscritions akan menerima data yang sama pada waktu yang bersamaan.  
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
   <img src="docs/soal1011.gif">
+
+## Praktikum 6: StreamBuilder
+ **Soal 12**
+ - Jelaskan maksud kode pada langkah 3 dan 7 !  
+  jawab :  
+  - langkah 3  
+  ```dart
+  import 'dart:math';
+  class NumberStream {
+    Stream<int> getNumber() async* {
+      yield* Stream.periodic(const Duration(seconds: 1), (int t) {
+        Random random = Random();
+        int myNum = random.nextInt(10);
+        return myNum;
+      });
+    }
+  }
+  ```  
+  terdapat class bernama NumberStream. di dalamnya terdapat method getNumber yang mengembalikan sebuah stream berupa bilangan bulat (Stream int) menggunakan Stream.periodic yang menghasilkan stream dengan interval waktu 1 detik. Di setiap periode, sebuah bilangan acak antara 0 hingga 9 dihasilkan menggunakan Random. Bilangan acak ini kemudian di-yield (dikirimkan) ke dalam stream dengan bantuan yield* async* untuk menghasilkan stream dari nilai-nilai yang di-yield.
+
+  - langkah 7 
+  ```dart
+  body: StreamBuilder(
+        stream: numberStream,
+        initialData: 0,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('Error!');
+          }
+          if (snapshot.hasData) {
+            return Center(
+              child: Text(
+                snapshot.data.toString(),
+                style: const TextStyle(fontSize: 96),
+              ),
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
+      ),
+  ```  
+  StreamBuilder untuk membangun sebuah widget yang bergantung pada data dari numberStream yang dihasilkan dari getNumber() pada NumberStream. bagian builder melakukan pengecekan jika ada data (snapshot.hasData), maka widget akan menampilkan teks dengan nilai dari data tersebut. Jika terjadi error (snapshot.hasError), kita hanya mencetak pesan 'Error!' tanpa menampilkan konten apapun. Jika tidak ada data, kita kembalikan widget yang tidak terlihat (SizedBox.shrink()). Ini memungkinkan tampilan untuk bereaksi terhadap perubahan data yang diterima dari stream, memberikan tampilan yang sesuai berdasarkan kondisi stream.  
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
+  <img src="docs/soal12.gif">
  

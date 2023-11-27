@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stream.dart';
+import 'stream.dart'; 
 import 'dart:async';
 import 'dart:math';
 
@@ -35,7 +35,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
   @override
   void initState() {
     super.initState();
-    colorStream = ColorStream(); // Pastikan untuk membuat objek ColorStream
+    colorStream = ColorStream();
     colorStream.getColors().listen((eventColor) {
       setState(() {
         bgColor = eventColor;
@@ -47,6 +47,10 @@ class _StreamHomePageState extends State<StreamHomePage> {
     numberStreamController.stream.listen((event) {
       setState(() {
         lastNumber = event;
+      });
+    }, onError: (error) {
+      setState(() {
+        lastNumber = -1;
       });
     });
   }
@@ -61,6 +65,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
     Random random = Random();
     int myNum = random.nextInt(10);
     numberStream.addNumberToSink(myNum);
+    // numberStream.addError();
   }
 
   @override

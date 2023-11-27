@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stream.dart'; 
+import 'stream.dart'; // Import your stream file
 import 'dart:async';
 import 'dart:math';
 
@@ -32,6 +32,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
   late NumberStream numberStream;
   late StreamController<int> numberStreamController;
   late StreamSubscription<int> subscription;
+  String values = '';
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
       (event) {
         setState(() {
           lastNumber = event * 10;
+          values += '$event - ';
         });
       },
       onError: (error) {
@@ -72,17 +74,18 @@ class _StreamHomePageState extends State<StreamHomePage> {
     super.dispose();
   }
 
- void addRandomNumber() {
-  Random random = Random();
-  int myNum = random.nextInt(10);
-  if (!numberStreamController.isClosed) {
-    numberStream.addNumberToSink(myNum);
-  } else {
-    setState(() {
-      lastNumber = -1;
-    });
+  void addRandomNumber() {
+    Random random = Random();
+    int myNum = random.nextInt(10);
+    if (!numberStreamController.isClosed) {
+      numberStream.addNumberToSink(myNum);
+    } else {
+      setState(() {
+        lastNumber = -1;
+      });
+    }
   }
-}
+
   void stopStream() {
     numberStreamController.close();
   }
@@ -102,6 +105,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(lastNumber.toString()),
+              Text(values),
               ElevatedButton(
                 onPressed: () => addRandomNumber(),
                 child: const Text('New Random Number'),

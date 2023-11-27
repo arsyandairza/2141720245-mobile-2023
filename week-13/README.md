@@ -230,3 +230,17 @@ class ColorStream {
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
 <img src="docs/soal9.png">
 <img src="docs/soal9.jpg">
+
+## Praktikum 5: Multiple stream subscriptions
+ **Soal 10**
+- Jelaskan mengapa error itu bisa terjadi ?  
+  jawab : 
+  `StateError (Bad state: Stream has already been listened to.)` karena mencoba untuk mendengarkan (listen) stream yang sama lebih dari sekali secara bersamaan. stream seharusnya unik, jadi ketika dijalankan bersamaan akan terjadi konflik.  
+
+ **Soal 11**
+- Jelaskan mengapa hal itu bisa terjadi ?  
+  jawab :  
+  karena menggunakan `Stream stream = numberStreamController.stream.asBroadcastStream();` sehingga dapat didengarkan oleh beberapa subscriptions secara bersamaan, berbeda dengan stream biasa yang hanya dapat didengarkan sekali. dan setiap subscritions akan menerima data yang sama pada waktu yang bersamaan.  
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
+  <img src="docs/soal1011.gif">
+ 

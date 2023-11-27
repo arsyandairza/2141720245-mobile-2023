@@ -289,3 +289,14 @@ class ColorStream {
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
   <img src="docs/soal12.gif">
  
+## Praktikum 7: BLoC Pattern
+**Soal 13**
+- Jelaskan maksud praktikum ini ! Dimanakah letak konsep pola BLoC-nya ?  
+  jawab :  
+  maksud praktikum ini adalah membuat logika bisnis terkait pengacakan angka. RandomNumberBloc pada file random_bloc berfungsi sebagai pusat pengaturan dan pemrosesan logika di luar tampilan UI. Di dalamnya, terdapat dua StreamController: _generateRandomController sebagai penerima perintah untuk menghasilkan angka acak, dan _randomNumberController sebagai pengirim angka acak ke UI. Saat ada trigger atau event yang diterima melalui _generateRandomController, blok tersebut memproses event tersebut dengan menghasilkan angka acak menggunakan Random().nextInt(10) dan mengirimkan angka acak tersebut melalui _randomNumberController ke bagian UI melalui output stream.  
+
+  RandomScreen pada file random_screen menampilkan angka acak yang diterima dari RandomNumberBloc. Pada RandomScreen menggunakan StreamBuilder untuk membangun tampilan yang terhubung dengan stream _bloc.randomNumber. Ini memungkinkan UI untuk secara otomatis diperbarui ketika ada perubahan data di dalam stream, sehingga teks yang menampilkan angka acak akan selalu terupdate sesuai dengan nilai terbaru yang diterima dari stream. Tombol FloatingActionButton bertindak untuk memicu proses pengacakan angka. Ketika tombol ini ditekan, onPressed akan mengirimkan perintah melalui generateRandom.add(null) ke _generateRandomController pada BLoC, yang selanjutnya akan memulai proses penghasilan angka acak dan mengirimkannya kembali ke UI melalui stream.
+
+  jadi pada praktikum ini, konsep pola BLoC terletak pada struktur dan pengelolaan kode di dalam `RandomNumberBloc` yang memisahkan logika bisnis dari tampilan UI dan manajemen state menggunakan stream untuk mengelola aliran data dan state aplikasi.
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
+  <img src="docs/soal13.gif">

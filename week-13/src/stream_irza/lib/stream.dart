@@ -3,11 +3,11 @@ import 'dart:async';
 
 class ColorStream {
   final List<Color> colors = [
-    Colors.red,
-    Colors.yellow,
-    Colors.blue,
-    Colors.green,
-    Colors.teal,
+    Colors.white,
+    // Colors.yellow,
+    // Colors.blue,
+    // Colors.green,
+    // Colors.teal,
     
   ];
   Stream<Color> getColors() async* {

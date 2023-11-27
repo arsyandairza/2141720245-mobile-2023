@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stream.dart';
+import 'stream.dart'; 
 import 'dart:async';
 import 'dart:math';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: StreamHomePage(),
     );
   }
@@ -31,6 +31,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
   int lastNumber = 0;
   late NumberStream numberStream;
   late StreamController<int> numberStreamController;
+  late StreamSubscription<int> subscription;
 
   @override
   void initState() {
@@ -46,40 +47,44 @@ class _StreamHomePageState extends State<StreamHomePage> {
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
 
-    numberStreamController.stream
-        .transform(StreamTransformer<int, int>.fromHandlers(
-          handleData: (value, sink) {
-            sink.add(value * 10);
-          },
-          handleError: (error, trace, sink) {
-            sink.addError(-1);
-          },
-          handleDone: (sink) => sink.close(),
-        ))
-        .listen(
-          (event) {
-            setState(() {
-              lastNumber = event;
-            });
-          },
-          onError: (error) {
-            setState(() {
-              lastNumber = -1;
-            });
-          },
-        );
+    subscription = numberStreamController.stream.listen(
+      (event) {
+        setState(() {
+          lastNumber = event * 10;
+        });
+      },
+      onError: (error) {
+        setState(() {
+          lastNumber = -1;
+        });
+      },
+      onDone: () {
+        // ignore: avoid_print
+        print('onDone was Called');
+      },
+    );
   }
 
   @override
   void dispose() {
     numberStreamController.close();
+    subscription.cancel();
     super.dispose();
   }
 
-  void addRandomNumber() {
-    Random random = Random();
-    int myNum = random.nextInt(10);
+ void addRandomNumber() {
+  Random random = Random();
+  int myNum = random.nextInt(10);
+  if (!numberStreamController.isClosed) {
     numberStream.addNumberToSink(myNum);
+  } else {
+    setState(() {
+      lastNumber = -1;
+    });
+  }
+}
+  void stopStream() {
+    numberStreamController.close();
   }
 
   @override
@@ -99,8 +104,12 @@ class _StreamHomePageState extends State<StreamHomePage> {
               Text(lastNumber.toString()),
               ElevatedButton(
                 onPressed: () => addRandomNumber(),
-                child: Text('New Random Number'),
+                child: const Text('New Random Number'),
               ),
+              ElevatedButton(
+                onPressed: () => stopStream(),
+                child: const Text('Stop Subscription'),
+              )
             ],
           ),
         ),

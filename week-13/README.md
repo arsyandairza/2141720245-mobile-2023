@@ -182,3 +182,51 @@ class ColorStream {
 
 - Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
 <img src="docs/soal8.gif">
+
+## Praktikum 4: Subscribe ke stream events
+
+**Soal 9**
+- Jelaskan maksud kode langkah 2, 6 dan 8 tersebut!  
+  jawab :  
+  - langkah 2  
+  ```dart
+  numberStream = NumberStream();
+  numberStreamController = numberStream.controller;
+  Stream stream = numberStreamController.stream;
+  subscription = stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    });
+  ```  
+  membuat sebuah objek NumberStream, kemudian mengakses controller dari objek tersebut untuk mengontrol stream yang dihasilkan. Selanjutnya, mendapatkan stream dari numberStreamController yang merupakan aliran data yang dapat didengarkan. Kemudian, menggunakan metode listen() pada stream untuk mulai mendengarkan nilai-nilai yang masuk ke dalam stream tersebut. Ketika ada data baru yang masuk, setState() digunakan untuk memperbarui nilai lastNumber dengan nilai terbaru dari stream.  
+
+  - langkah 6  
+  ```dart
+  void dispose() {
+    numberStreamController.close();
+    subscription.cancel();
+    super.dispose();
+  }
+  ```  
+  numberStreamController.close() digunakan untuk menutup controller stream, menghentikan pengiriman data ke dalam stream. Selanjutnya, subscription.cancel() digunakan untuk membatalkan langganan (subscription) terhadap stream yang telah dibuat sebelumnya. Hal ini penting untuk memastikan bahwa tidak ada langganan yang tersisa yang dapat menyebabkan memory leak atau masalah sumber daya lainnya setelah widget atau halaman dihapus.  
+
+  - langkah 8  
+  ```dart
+  void addRandomNumber() {
+    Random random = Random();
+    int myNum = random.nextInt(10);
+    if (!numberStreamController.isClosed) {
+      numberStream.addNumberToSink(myNum);
+    } else {
+      setState(() {
+        lastNumber = -1;
+      });
+    }
+  }
+  ```
+  addRandomNumber() digunakan untuk menambahkan nomor acak ke dalam stream menggunakan objek Random untuk mendapatkan nomor acak antara 0 hingga 9. Selanjutnya, memeriksa apakah numberStreamController sudah ditutup (isClosed). Jika controller stream masih terbuka, maka menggunakan numberStream.addNumberToSink(myNum) untuk menambahkan nomor acak ke dalam stream. Namun, jika controller stream sudah tertutup, maka setState() digunakan untuk mengubah nilai lastNumber menjadi -1, yang menunjukkan bahwa ada masalah dalam menambahkan nomor ke dalam stream yang sudah ditutup.  
+
+- Capture hasil praktikum Anda berupa GIF dan lampirkan di README.  
+<img src="docs/soal9.png">
+<img src="docs/soal9.jpg">
